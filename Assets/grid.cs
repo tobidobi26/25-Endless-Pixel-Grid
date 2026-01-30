@@ -1,13 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PixelGrid : MonoBehaviour
 {
     public Transform grid;
 
-    public GameObject[,] pixels = new GameObject[7,10];
+    public Transform Q;
+    private GameObject[,] pixels;
+    private GameObject[] Qs;
 
-    private int rows = 10;
-    private int cols = 7;
+    private int rows;
+    private int cols;
+
+    private int nQs;
 
     void Start()
     {
@@ -23,7 +28,20 @@ public class PixelGrid : MonoBehaviour
             for (int c = 0; c < cols; c++)
             {
                 pixels[r, c] = row.GetChild(c).gameObject;
+                Image img = pixels[r, c].GetComponent<Image>();
+                img.color = Color.black;
             }
         }
+
+        nQs = Q.childCount;
+        Qs = new GameObject[nQs];
+        for(int i = 0; i < nQs; i++)
+        {
+            Qs[i] = Q.GetChild(i).gameObject;
+            Image img = Qs[i].GetComponent<Image>();
+            img.color = Color.black;
+        }
     }
+
+
 }
